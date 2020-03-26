@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Orfanato</title>
+</head>
+<body>
+
+    <div>
+        <h2>Todos las Familias</h2>
+        <ul id="familia"></ul>
+    </div>
+
+    <div>
+        <h2>Agregar Nueva familia</h2> <br>
+
+        <h2>Nombre</h2>
+        <input type="text" id="input_nombre" size="20" />
+        <h2>Apellido</h2>
+        <input type="text" id="input_apellido" size="20" /><br>
+        <h2>Telefono</h2>
+        <input type="text" id="input_telefono" size="20" /><br>
+        <input type="button" value="Agregar" onclick="add();" />
+    </div>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
+    <script>
+        var url = '/api/familia';
+        $(document).ready(function () {
+            $.getJSON(url)
+                .done(function (data) {
+                    $.each(data, function (key, item) {
+                        $('<li>', { text: formatear(item) }).appendTo($('#familia'));
+                    });
+                });
+        });
+
+        function formatear(item) {
+            return item.Nombre + '----' + item.Apellido + ' ---> Telefono ' + item.Telefono;
+        }
+
+
+        function add() {
+            var nombre = $('#input_nombre').val();
+            var apellido = $('#input_apellido').val();
+            var telefono = $('#input_telefono').val();
+
+
+            if (nombre != "" && apellido != "" && telefono != "") {
+                var familia = {
+                    Nombre: nombre,
+                    Apellido: apellido,
+                    Telefono: telefono
+                };
+
+                var info = JSON.stringify(familia);
+                $.ajax({
+                    url: '/api/familia',
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: info,
+                    dataType: 'json',
+                    success: function (data) {
+                        alert("El registro se agrego con exito!.");
+                        location.reload();
+                    }
+                }).fail(
+                    function (xhr, textStatus, err) {
+                        alert(err);
+                    }
+                );
+            } else {
+                alert("Todos los campos son obligatorios.");
+            }
+        }
+    </script>
+</body>
+</html>
