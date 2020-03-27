@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home-admin"></ion-back-button>
+    </ion-buttons>
+    <ion-title>lista de Productos del Inventario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-searchbar (ionChange)="filterItemsData($event)" placeholder="Nombre o codigo"></ion-searchbar>
+        <ion-list *ngFor="let item of items; let i = index">
+         <ion-item-sliding>
+          <ion-item>
+            <ion-label>
+              <strong><h1>{{ item.nombre }}</h1></strong>
+              <h4>ID: <ion-text>{{ item.id }}</ion-text></h4>
+              <h4>Codigo de Referencia: <ion-text>{{ item.idReferencia }}</ion-text></h4>
+              <h4>Disponibles: <ion-text>{{ item.cantidad }}</ion-text></h4>
+              <br>
+              <h4>{{ item.categoria }}</h4>
+              <h4>RD${{ item.precio }}</h4>
+              <p>{{ item.descripcion }}</p>
+              
+            </ion-label>
+          </ion-item>
+          
+          <ion-item-options side="end">
+            <ion-item-option color="danger" (click)="delete(item.id)" >Eliminar</ion-item-option>
+            <ion-item-option color="secondary" [routerLink]="['/modificar-inventario',item.id]">Modificar</ion-item-option>
+          </ion-item-options>
+          
+        </ion-item-sliding>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

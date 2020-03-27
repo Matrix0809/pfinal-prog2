@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home-admin"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Modificar Productos del inventario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+<form>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Codigo<ion-text color="danger" >*</ion-text></ion-label>
+      <ion-input required type="text" name="id" [(ngModel)]="producto.id" disabled></ion-input>
+    </ion-item>
+   <ion-item>
+    <ion-label position="stacked">Nombre<ion-text color="danger">*</ion-text></ion-label>
+    <ion-input required type="text" name="nombre" [(ngModel)]="producto.nombre" required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Jerarquia<ion-text color="danger">*</ion-text></ion-label>
+    <ion-input required type="text" name="categoria" [(ngModel)]="producto.categoria" required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Cantidad<ion-text color="danger">*</ion-text></ion-label>
+    <ion-input required type="number" name="cantidad" placeholder="0" [(ngModel)]="producto.cantidad"required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Costo</ion-label>
+    <ion-input type="number" name="precio" placeholder="0000000.00" [(ngModel)]="producto.precio"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Detalles</ion-label>
+    <ion-input type="text" name="description" [(ngModel)]="producto.descripcion"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">ID de Referencia</ion-label>
+    <ion-input required type="text" name="idReferencia" [(ngModel)]="producto.idReferencia"></ion-input>
+  </ion-item>
+  <ion-button fill="outline" expand="block" color="success" (click)="modifyProducto()">AGREGAR</ion-button>
+</ion-list>
+</form>
+</ion-content>

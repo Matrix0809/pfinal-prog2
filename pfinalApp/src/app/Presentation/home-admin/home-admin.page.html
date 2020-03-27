@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button (click)="openFirst()" shape="round">
+      <ion-icon slot="icon-only" name="menu"></ion-icon>
+    </ion-button>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-menu side="start" menuId="first" contentId="main">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Opciones</ion-title>+
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-menu-toggle *ngFor="let p of pages">
+
+        <ion-item (click)="goToPage(p)" routerDirection="root">
+          <ion-label>{{ p.title }}</ion-label>
+
+          <ion-icon [name]="p.icon" slot="start"></ion-icon>
+        </ion-item>
+
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-router-outlet id="main" main></ion-router-outlet>
+
+<ion-content padding>
+<ion-grid>
+<ion-row>
+  <ion-col>
+    <div>
+      
+      <ion-card>
+        <ion-item>
+          <ion-icon name="pin" slot="start"></ion-icon>
+          <ion-label>Cantidad de Productos</ion-label>
+          <ion-button (click)="goToList()" fill="outline" slot="end">Ver</ion-button>
+          <ion-button slot="end" fill="outline" color="danger" size="small">
+            <ion-icon  name="reload-outline" (click)="loadCantidad()"></ion-icon>
+          </ion-button>
+        </ion-item>
+      
+        <ion-card-content>
+            Cantidad de productos enlistados: <ion-text color="danger"><strong>{{cantidad}} </strong></ion-text>
+        </ion-card-content>
+      </ion-card>
+   
+    </div>
+  </ion-col>
+</ion-row>
+</ion-grid>
+</ion-content>
